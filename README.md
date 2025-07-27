@@ -31,8 +31,8 @@ We're building something special. Be the first to know when we launch and get ea
 
 ## Contact
 
-- **Website**: [ventry.app](https://ventry.app)
-- **Email**: contact@ventry.app
+- **Website**: [ventry-tickets.com](https://ventry-tickets.com)
+- **Email**: contact@ventry-tickets.com
 
 ---
 
