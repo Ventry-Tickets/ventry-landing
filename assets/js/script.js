@@ -1,12 +1,229 @@
-// Ventry Landing Page JavaScript
+// Ventry Landing Page JavaScript - Enhanced Luxury Experience
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize all functionality
-    initCountdown();
-    initEmailForm();
-    initScrollEffects();
-    initAnimations();
+    // Initialize luxury loading experience
+    initLuxuryLoader();
+    
+    // Initialize all functionality after loading
+    setTimeout(() => {
+        initCountdown();
+        initEmailForm();
+        initScrollEffects();
+        initAnimations();
+        initLuxuryEffects();
+        initParallaxEffects();
+    }, 500);
 });
+
+// Luxury Loading Experience
+function initLuxuryLoader() {
+    const loader = document.getElementById('luxuryLoader');
+    
+    if (loader) {
+        // Hide loader after content is loaded
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                loader.classList.add('fade-out');
+                
+                // Remove loader from DOM after transition
+                setTimeout(() => {
+                    loader.remove();
+                    
+                    // Trigger entrance animations
+                    document.body.style.overflow = 'visible';
+                    triggerEntranceAnimations();
+                }, 800);
+            }, 1000);
+        });
+    }
+}
+
+// Trigger entrance animations
+function triggerEntranceAnimations() {
+    const heroElements = document.querySelectorAll('.logo-container, .hero-text');
+    
+    heroElements.forEach((element, index) => {
+        setTimeout(() => {
+            element.style.opacity = '1';
+            element.style.transform = 'translateY(0)';
+        }, index * 200);
+    });
+}
+
+// Luxury Effects and Micro-interactions
+function initLuxuryEffects() {
+    // Cursor trail effect for desktop
+    if (window.innerWidth > 768) {
+        createCursorTrail();
+    }
+    
+    // Enhanced button interactions
+    enhanceButtonInteractions();
+    
+    // Parallax mouse movement for hero elements
+    initMouseParallax();
+    
+    // Smooth reveal animations on scroll
+    initScrollReveal();
+}
+
+// Create subtle cursor trail effect
+function createCursorTrail() {
+    const trail = [];
+    const trailLength = 8;
+    
+    for (let i = 0; i < trailLength; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'cursor-trail';
+        dot.style.cssText = `
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: rgba(217, 253, 7, ${0.8 - i * 0.1});
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease-out;
+            opacity: 0;
+        `;
+        document.body.appendChild(dot);
+        trail.push(dot);
+    }
+    
+    let mouseX = 0, mouseY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+    
+    function animateTrail() {
+        let x = mouseX, y = mouseY;
+        
+        trail.forEach((dot, index) => {
+            dot.style.left = x + 'px';
+            dot.style.top = y + 'px';
+            dot.style.opacity = '1';
+            
+            const nextDot = trail[index + 1] || trail[0];
+            x += (parseFloat(nextDot.style.left) - x) * 0.3;
+            y += (parseFloat(nextDot.style.top) - y) * 0.3;
+        });
+        
+        requestAnimationFrame(animateTrail);
+    }
+    
+    animateTrail();
+}
+
+// Enhanced button interactions
+function enhanceButtonInteractions() {
+    const ctaButton = document.querySelector('.cta-button');
+    const comingSoon = document.querySelector('.coming-soon');
+    
+    [ctaButton, comingSoon].forEach(button => {
+        if (button) {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.02)';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+            
+            button.addEventListener('mousedown', function() {
+                this.style.transform = 'translateY(-1px) scale(0.98)';
+            });
+            
+            button.addEventListener('mouseup', function() {
+                this.style.transform = 'translateY(-3px) scale(1.02)';
+            });
+        }
+    });
+}
+
+// Mouse parallax effect for hero elements
+function initMouseParallax() {
+    const hero = document.querySelector('.hero');
+    const logo = document.querySelector('.ventry-logo');
+    const headline = document.querySelector('.hero-headline');
+    const subheadline = document.querySelector('.hero-subheadline');
+    
+    if (hero && window.innerWidth > 768) {
+        hero.addEventListener('mousemove', (e) => {
+            const rect = hero.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            
+            if (logo) {
+                logo.style.transform = `translate(${x * 10}px, ${y * 10}px)`;
+            }
+            
+            if (headline) {
+                headline.style.transform = `translate(${x * 5}px, ${y * 5}px)`;
+            }
+            
+            if (subheadline) {
+                subheadline.style.transform = `translate(${x * 3}px, ${y * 3}px)`;
+            }
+        });
+        
+        hero.addEventListener('mouseleave', () => {
+            [logo, headline, subheadline].forEach(element => {
+                if (element) {
+                    element.style.transform = 'translate(0, 0)';
+                }
+            });
+        });
+    }
+}
+
+// Parallax effects on scroll
+function initParallaxEffects() {
+    const heroBackground = document.querySelector('.hero-background');
+    const patternLines = document.querySelectorAll('.pattern-line');
+    
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * -0.5;
+        
+        if (heroBackground) {
+            heroBackground.style.transform = `translateY(${rate}px)`;
+        }
+        
+        patternLines.forEach((line, index) => {
+            const lineRate = scrolled * (0.1 + index * 0.05);
+            line.style.transform = `skew(-25deg) translateY(${lineRate}px)`;
+        });
+    });
+}
+
+// Scroll reveal animations
+function initScrollReveal() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    // Elements to animate on scroll
+    const animateElements = document.querySelectorAll('.cta-content, .about-content, .footer-content');
+    
+    animateElements.forEach(element => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(30px)';
+        element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        observer.observe(element);
+    });
+}
 
 // Countdown Timer
 function initCountdown() {
@@ -47,7 +264,141 @@ function initCountdown() {
     setInterval(updateCountdown, 1000);
 }
 
-// Email Form Handling
+// Email Form Handling - Enhanced
+function initEmailForm() {
+    const form = document.getElementById('emailForm');
+    const emailInput = document.getElementById('email');
+    const submitButton = form?.querySelector('.cta-button');
+    
+    if (!form || !emailInput || !submitButton) return;
+    
+    // Enhanced email validation
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+    
+    // Real-time validation feedback
+    emailInput.addEventListener('input', function() {
+        const email = this.value.trim();
+        const inputGroup = this.closest('.input-group');
+        
+        if (email.length > 0) {
+            if (validateEmail(email)) {
+                inputGroup.style.borderColor = 'rgba(217, 253, 7, 0.5)';
+                inputGroup.style.boxShadow = '0 0 0 2px rgba(217, 253, 7, 0.2), 0 12px 40px rgba(11, 38, 251, 0.2)';
+            } else {
+                inputGroup.style.borderColor = 'rgba(255, 100, 100, 0.5)';
+                inputGroup.style.boxShadow = '0 0 0 2px rgba(255, 100, 100, 0.2), 0 12px 40px rgba(11, 38, 251, 0.2)';
+            }
+        } else {
+            inputGroup.style.borderColor = '';
+            inputGroup.style.boxShadow = '';
+        }
+    });
+    
+    // Enhanced form submission
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const email = emailInput.value.trim();
+        const originalButtonText = submitButton.innerHTML;
+        
+        if (!validateEmail(email)) {
+            showNotification('Please enter a valid email address', 'error');
+            return;
+        }
+        
+        // Button loading state
+        submitButton.innerHTML = `
+            <span>Joining...</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="animate-spin">
+                <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="32" stroke-dashoffset="32">
+                    <animate attributeName="stroke-dashoffset" values="32;0" dur="1s" repeatCount="indefinite"/>
+                </circle>
+            </svg>
+        `;
+        submitButton.disabled = true;
+        
+        // Simulate API call
+        setTimeout(() => {
+            // Success state
+            submitButton.innerHTML = `
+                <span>Welcome!</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M16 6L8 14L4 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            `;
+            submitButton.style.background = 'linear-gradient(135deg, rgba(217, 253, 7, 0.9) 0%, rgba(217, 253, 7, 0.8) 100%)';
+            submitButton.style.color = 'var(--primary-black)';
+            
+            showNotification('🎉 You\'re on the exclusive list! We\'ll be in touch soon.', 'success');
+            
+            // Reset form
+            setTimeout(() => {
+                emailInput.value = '';
+                submitButton.innerHTML = originalButtonText;
+                submitButton.disabled = false;
+                submitButton.style.background = '';
+                submitButton.style.color = '';
+                
+                const inputGroup = emailInput.closest('.input-group');
+                inputGroup.style.borderColor = '';
+                inputGroup.style.boxShadow = '';
+            }, 3000);
+            
+        }, 2000);
+    });
+}
+
+// Luxury notification system
+function showNotification(message, type = 'info') {
+    // Remove existing notifications
+    const existing = document.querySelector('.luxury-notification');
+    if (existing) existing.remove();
+    
+    const notification = document.createElement('div');
+    notification.className = `luxury-notification ${type}`;
+    
+    const colors = {
+        success: 'rgba(217, 253, 7, 0.95)',
+        error: 'rgba(255, 100, 100, 0.95)',
+        info: 'rgba(11, 38, 251, 0.95)'
+    };
+    
+    notification.style.cssText = `
+        position: fixed;
+        top: 30px;
+        right: 30px;
+        padding: 20px 30px;
+        background: ${colors[type]};
+        color: ${type === 'success' ? 'var(--primary-black)' : 'white'};
+        border-radius: 12px;
+        font-weight: 500;
+        font-size: 0.95rem;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(20px);
+        z-index: 10000;
+        transform: translateX(400px);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        max-width: 350px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    `;
+    
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    // Animate in
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Auto remove
+    setTimeout(() => {
+        notification.style.transform = 'translateX(400px)';
+        setTimeout(() => notification.remove(), 400);
+    }, 5000);
+}
 function initEmailForm() {
     const emailForm = document.getElementById('emailForm');
     const emailInput = document.getElementById('email');
