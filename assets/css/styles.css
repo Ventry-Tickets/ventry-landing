@@ -187,6 +187,18 @@
     --container-max-width: 1200px;
     --section-padding: 80px 0;
     --mobile-section-padding: 60px 0;
+    
+    /* Pattern Variables */
+    --pattern-intensity: 1;
+    --pattern-entrance: 0;
+    --pattern-offset: 0px;
+    --pattern-pulse: 1;
+    
+    /* Pattern Opacities */
+    --pattern-hero-opacity: calc(0.02 * var(--pattern-intensity));
+    --pattern-cta-opacity: calc(0.04 * var(--pattern-intensity));
+    --pattern-divider-opacity: calc(0.06 * var(--pattern-intensity));
+    --pattern-footer-opacity: calc(0.02 * var(--pattern-intensity));
 }
 
 html {
@@ -294,6 +306,98 @@ body {
         radial-gradient(circle at 80% 70%, rgba(217, 253, 7, 0.05) 0%, transparent 40%),
         linear-gradient(135deg, var(--primary-black) 0%, rgba(0, 0, 0, 0.95) 30%, rgba(11, 38, 251, 0.1) 70%, var(--primary-black) 100%);
     z-index: 1;
+}
+
+/* Hero Pattern Layer - Enhanced with HTML Elements */
+.hero-pattern-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.pattern-element {
+    position: absolute;
+    opacity: 0.03;
+    animation: patternFloat 20s ease-in-out infinite;
+}
+
+.pattern-v1 {
+    top: 20%;
+    left: 15%;
+    width: 60px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-white) 0%, transparent 100%);
+    clip-path: polygon(0 0, 70% 0, 70% 30%, 100% 50%, 70% 70%, 70% 100%, 0 100%, 30% 50%);
+    animation-delay: 0s;
+}
+
+.pattern-v2 {
+    top: 60%;
+    right: 20%;
+    width: 40px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-blue) 0%, transparent 100%);
+    clip-path: polygon(0 0, 70% 0, 70% 30%, 100% 50%, 70% 70%, 70% 100%, 0 100%, 30% 50%);
+    animation-delay: 7s;
+}
+
+.pattern-v3 {
+    top: 40%;
+    left: 70%;
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(135deg, var(--secondary-yellow-green) 0%, transparent 100%);
+    border-radius: 4px;
+    animation-delay: 14s;
+}
+
+@keyframes patternFloat {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg); 
+        opacity: 0.03; 
+    }
+    25% { 
+        transform: translateY(-20px) rotate(2deg); 
+        opacity: 0.05; 
+    }
+    50% { 
+        transform: translateY(-10px) rotate(-1deg); 
+        opacity: 0.02; 
+    }
+    75% { 
+        transform: translateY(-30px) rotate(1deg); 
+        opacity: 0.04; 
+    }
+}
+
+/* Ventry Logo Pattern Layer - Combined with HTML elements */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cdefs%3E%3Cg id='ventry-pattern'%3E%3Cpath d='M50 50 L80 50 L80 70 L100 100 L80 100 L50 70 Z' fill='%23ffffff' opacity='0.015'/%3E%3Crect x='110' y='50' width='20' height='20' fill='%23ffffff' opacity='0.01'/%3E%3C/g%3E%3C/defs%3E%3Cuse href='%23ventry-pattern' x='0' y='0'/%3E%3Cuse href='%23ventry-pattern' x='100' y='0'/%3E%3Cuse href='%23ventry-pattern' x='0' y='100'/%3E%3Cuse href='%23ventry-pattern' x='100' y='100'/%3E%3C/svg%3E");
+    background-size: 400px 400px;
+    opacity: calc(0.4 * var(--pattern-intensity));
+    z-index: 1;
+    animation: heroPatternFloat 60s linear infinite;
+    pointer-events: none;
+    transform: translateY(var(--pattern-offset));
+    transition: opacity 1s ease;
+}
+
+@keyframes heroPatternFloat {
+    0% { transform: translate(0, var(--pattern-offset)) rotate(0deg); }
+    25% { transform: translate(-20px, calc(var(--pattern-offset) - 10px)) rotate(0.5deg); }
+    50% { transform: translate(-10px, calc(var(--pattern-offset) - 20px)) rotate(0deg); }
+    75% { transform: translate(-30px, calc(var(--pattern-offset) - 5px)) rotate(-0.5deg); }
+    100% { transform: translate(0, var(--pattern-offset)) rotate(0deg); }
 }
 
 .hero-background::before {
@@ -523,6 +627,100 @@ body {
     pointer-events: none;
 }
 
+/* CTA Pattern Background - Enhanced with HTML Elements */
+.cta-pattern-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.floating-pattern {
+    position: absolute;
+    opacity: 0.02;
+    animation: floatingPatternMove 30s ease-in-out infinite;
+}
+
+.pattern-circle {
+    top: 20%;
+    left: 10%;
+    width: 80px;
+    height: 80px;
+    border: 2px solid var(--primary-white);
+    border-radius: 50%;
+    animation-delay: 0s;
+}
+
+.pattern-diamond {
+    top: 70%;
+    right: 15%;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, var(--primary-blue), transparent);
+    transform: rotate(45deg);
+    animation-delay: 10s;
+}
+
+.pattern-line {
+    top: 50%;
+    left: 80%;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--secondary-yellow-green), transparent);
+    animation-delay: 20s;
+}
+
+@keyframes floatingPatternMove {
+    0%, 100% { 
+        transform: translate(0, 0) rotate(0deg); 
+        opacity: 0.02; 
+    }
+    25% { 
+        transform: translate(-30px, -20px) rotate(5deg); 
+        opacity: 0.04; 
+    }
+    50% { 
+        transform: translate(-15px, -40px) rotate(-3deg); 
+        opacity: 0.01; 
+    }
+    75% { 
+        transform: translate(-45px, -10px) rotate(2deg); 
+        opacity: 0.03; 
+    }
+}
+
+/* Pattern Divider Behind Email Form - Reduced since we have HTML elements */
+.cta-section::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    height: 400px;
+    transform: translate(-50%, -50%) scale(var(--pattern-pulse));
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cdefs%3E%3Cg id='ventry-form-pattern'%3E%3Cpath d='M100 80 L140 80 L140 110 L180 160 L140 160 L100 110 Z' fill='none' stroke='%23ffffff' stroke-width='1' opacity='0.02'/%3E%3Cpath d='M100 100 L140 140 L100 180 L60 140 Z' fill='none' stroke='%230b26fb' stroke-width='0.5' opacity='0.015'/%3E%3Crect x='200' y='80' width='30' height='30' fill='none' stroke='%23ffffff' stroke-width='0.5' opacity='0.01'/%3E%3C/g%3E%3C/defs%3E%3Cuse href='%23ventry-form-pattern' x='0' y='0'/%3E%3Cuse href='%23ventry-form-pattern' x='150' y='0'/%3E%3Cuse href='%23ventry-form-pattern' x='75' y='130'/%3E%3Cuse href='%23ventry-form-pattern' x='225' y='130'/%3E%3C/svg%3E");
+    background-size: 400px 400px;
+    opacity: calc(0.5 * var(--pattern-intensity));
+    z-index: -1;
+    animation: formPatternPulse 45s ease-in-out infinite;
+    pointer-events: none;
+    transition: transform 0.3s ease, opacity 1s ease;
+}
+
+@keyframes formPatternPulse {
+    0%, 100% { 
+        transform: translate(-50%, -50%) scale(var(--pattern-pulse)) rotate(0deg);
+        opacity: calc(0.8 * var(--pattern-intensity));
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(calc(var(--pattern-pulse) * 1.05)) rotate(1deg);
+        opacity: calc(0.4 * var(--pattern-intensity));
+    }
+}
+
 .cta-content {
     text-align: center;
     max-width: 700px;
@@ -655,7 +853,7 @@ body {
 
 /* Pattern Section */
 .pattern-section {
-    padding: 80px 0;
+    padding: 100px 0;
     background: var(--primary-black);
     overflow: hidden;
     position: relative;
@@ -673,39 +871,120 @@ body {
         radial-gradient(circle at center, rgba(217, 253, 7, 0.01) 0%, transparent 70%);
 }
 
+/* Pattern Section - Enhanced Structure */
+.pattern-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.pattern-bg-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.bg-pattern-item {
+    position: absolute;
+    opacity: 0.02;
+    animation: bgPatternRotate 40s linear infinite;
+}
+
+.bg-pattern-item.item-1 {
+    top: 20%;
+    left: 20%;
+    width: 40px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-blue), transparent);
+    clip-path: polygon(0 0, 70% 0, 100% 50%, 70% 100%, 0 100%, 30% 50%);
+    animation-delay: 0s;
+}
+
+.bg-pattern-item.item-2 {
+    top: 20%;
+    right: 20%;
+    width: 40px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-blue), transparent);
+    clip-path: polygon(0 0, 70% 0, 100% 50%, 70% 100%, 0 100%, 30% 50%);
+    animation-delay: 10s;
+}
+
+.bg-pattern-item.item-3 {
+    bottom: 30%;
+    left: 25%;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--secondary-yellow-green), transparent);
+    border-radius: 6px;
+    animation-delay: 20s;
+}
+
+.bg-pattern-item.item-4 {
+    bottom: 30%;
+    right: 25%;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--secondary-yellow-green), transparent);
+    border-radius: 6px;
+    animation-delay: 30s;
+}
+
+@keyframes bgPatternRotate {
+    0% { transform: rotate(0deg) scale(1); opacity: 0.02; }
+    25% { transform: rotate(90deg) scale(1.1); opacity: 0.04; }
+    50% { transform: rotate(180deg) scale(0.9); opacity: 0.01; }
+    75% { transform: rotate(270deg) scale(1.05); opacity: 0.03; }
+    100% { transform: rotate(360deg) scale(1); opacity: 0.02; }
+}
+
 .v-pattern {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 30px;
-    opacity: 0.4;
+    opacity: 0.5;
     position: relative;
     z-index: 1;
 }
 
 .pattern-line {
-    width: 3px;
+    width: 4px;
     height: 120px;
-    background: linear-gradient(to bottom, 
-        transparent 0%, 
-        rgba(11, 38, 251, 0.3) 20%, 
-        var(--primary-blue) 50%, 
-        rgba(11, 38, 251, 0.3) 80%, 
-        transparent 100%);
+    position: relative;
     transform: skew(-25deg);
     animation: luxuryPatternPulse 4s ease-in-out infinite;
+    border-radius: 2px;
+}
+
+.pattern-line-inner {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, 
+        transparent 0%, 
+        rgba(11, 38, 251, 0.4) 20%, 
+        var(--primary-blue) 50%, 
+        rgba(11, 38, 251, 0.4) 80%, 
+        transparent 100%);
     border-radius: 2px;
     box-shadow: 0 0 20px rgba(11, 38, 251, 0.2);
 }
 
-.pattern-line:nth-child(2) {
-    animation-delay: 0.8s;
+.pattern-line.main-line {
     height: 150px;
+    width: 5px;
+    animation-delay: 0.8s;
+}
+
+.pattern-line.main-line .pattern-line-inner {
     background: linear-gradient(to bottom, 
         transparent 0%, 
-        rgba(217, 253, 7, 0.2) 20%, 
+        rgba(217, 253, 7, 0.3) 20%, 
         var(--secondary-yellow-green) 50%, 
-        rgba(217, 253, 7, 0.2) 80%, 
+        rgba(217, 253, 7, 0.3) 80%, 
         transparent 100%);
     box-shadow: 0 0 25px rgba(217, 253, 7, 0.3);
 }
@@ -716,7 +995,7 @@ body {
 
 @keyframes luxuryPatternPulse {
     0%, 100% { 
-        opacity: 0.4; 
+        opacity: 0.5; 
         transform: skew(-25deg) scaleY(1); 
         filter: blur(0px);
     }
@@ -747,6 +1026,102 @@ body {
         radial-gradient(ellipse at 20% 30%, rgba(11, 38, 251, 0.02) 0%, transparent 70%),
         radial-gradient(ellipse at 80% 70%, rgba(217, 253, 7, 0.01) 0%, transparent 70%);
     pointer-events: none;
+}
+
+/* About Section - Corner Decorations */
+.about-decorations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.corner-decoration {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    opacity: 0.025;
+    animation: cornerFloat 25s ease-in-out infinite;
+}
+
+.corner-decoration.top-left {
+    top: 40px;
+    left: 40px;
+    background: linear-gradient(135deg, var(--primary-white), transparent);
+    clip-path: polygon(0 0, 70% 0, 100% 30%, 70% 70%, 30% 100%, 0 70%);
+    animation-delay: 0s;
+}
+
+.corner-decoration.top-right {
+    top: 40px;
+    right: 40px;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--primary-blue);
+    border-radius: 6px;
+    animation-delay: 8s;
+}
+
+.corner-decoration.bottom-left {
+    bottom: 40px;
+    left: 40px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--secondary-yellow-green), transparent);
+    border-radius: 50%;
+    animation-delay: 16s;
+}
+
+.corner-decoration.bottom-right {
+    bottom: 40px;
+    right: 40px;
+    background: linear-gradient(135deg, var(--primary-white), transparent);
+    clip-path: polygon(0 0, 70% 0, 100% 30%, 70% 70%, 30% 100%, 0 70%);
+    animation-delay: 4s;
+}
+
+@keyframes cornerFloat {
+    0%, 100% { 
+        transform: translate(0, 0) rotate(0deg); 
+        opacity: 0.025; 
+    }
+    25% { 
+        transform: translate(-5px, -10px) rotate(5deg); 
+        opacity: 0.04; 
+    }
+    50% { 
+        transform: translate(-10px, -5px) rotate(-3deg); 
+        opacity: 0.015; 
+    }
+    75% { 
+        transform: translate(-3px, -15px) rotate(2deg); 
+        opacity: 0.035; 
+    }
+}
+
+/* Corner Patterns - Reduced since we have HTML elements */
+.about-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1200 600'%3E%3Cdefs%3E%3Cg id='corner-pattern'%3E%3Cpath d='M20 20 L50 20 L50 40 L70 60 L50 60 L20 40 Z' fill='%23ffffff' opacity='0.01'/%3E%3Crect x='80' y='20' width='15' height='15' fill='%230b26fb' opacity='0.008'/%3E%3C/g%3E%3C/defs%3E%3Cuse href='%23corner-pattern' x='0' y='0'/%3E%3Cuse href='%23corner-pattern' x='1100' y='0'/%3E%3Cuse href='%23corner-pattern' x='0' y='500'/%3E%3Cuse href='%23corner-pattern' x='1100' y='500'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    opacity: calc(0.3 * var(--pattern-intensity));
+    z-index: -1;
+    animation: cornerPatternFade 30s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes cornerPatternFade {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 0.3; }
 }
 
 .about-content {
@@ -853,6 +1228,29 @@ body {
     pointer-events: none;
 }
 
+/* Subtle Footer Pattern */
+.footer::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='100' viewBox='0 0 400 100'%3E%3Cdefs%3E%3Cg id='footer-pattern'%3E%3Cpath d='M50 30 L70 30 L70 45 L85 60 L70 60 L50 45 Z' fill='none' stroke='%23ffffff' stroke-width='0.5' opacity='0.02'/%3E%3Cpath d='M100 40 L115 40 L115 50 L115 50 L100 50 Z' fill='%230b26fb' opacity='0.015'/%3E%3C/g%3E%3C/defs%3E%3Cuse href='%23footer-pattern' x='0' y='0'/%3E%3Cuse href='%23footer-pattern' x='200' y='0'/%3E%3Cuse href='%23footer-pattern' x='100' y='25'/%3E%3Cuse href='%23footer-pattern' x='300' y='25'/%3E%3C/svg%3E");
+    background-size: 800px 200px;
+    background-repeat: repeat-x;
+    background-position: bottom;
+    opacity: 0.4;
+    z-index: 0;
+    animation: footerPatternSlide 120s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes footerPatternSlide {
+    0% { background-position-x: 0; }
+    100% { background-position-x: 800px; }
+}
+
 .footer-content {
     display: flex;
     flex-direction: column;
@@ -948,10 +1346,91 @@ body {
 @media (max-width: 768px) {
     :root {
         --section-padding: var(--mobile-section-padding);
+        /* Reduce pattern intensity on mobile for performance */
+        --pattern-intensity: 0.6;
     }
     
     .hero {
         min-height: 600px;
+    }
+    
+    /* Simplify hero pattern elements on mobile */
+    .pattern-element {
+        opacity: 0.02;
+        animation-duration: 15s;
+    }
+    
+    .pattern-v1, .pattern-v2 {
+        width: 40px;
+        height: 50px;
+    }
+    
+    .pattern-v3 {
+        width: 20px;
+        height: 20px;
+    }
+    
+    /* Simplify floating patterns */
+    .floating-pattern {
+        opacity: 0.015;
+        animation-duration: 20s;
+    }
+    
+    .pattern-circle {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .pattern-diamond {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .pattern-line {
+        width: 80px;
+    }
+    
+    /* Simplify background pattern items */
+    .bg-pattern-item {
+        opacity: 0.015;
+        animation-duration: 30s;
+    }
+    
+    .bg-pattern-item.item-1, .bg-pattern-item.item-2 {
+        width: 30px;
+        height: 40px;
+    }
+    
+    .bg-pattern-item.item-3, .bg-pattern-item.item-4 {
+        width: 35px;
+        height: 35px;
+    }
+    
+    /* Simplify corner decorations */
+    .corner-decoration {
+        width: 40px;
+        height: 40px;
+        opacity: 0.02;
+        animation-duration: 20s;
+    }
+    
+    .corner-decoration.top-right, .corner-decoration.bottom-left {
+        width: 30px;
+        height: 30px;
+    }
+    
+    /* Simplify hero pattern on mobile */
+    .hero::after {
+        background-size: 300px 300px;
+        animation-duration: 40s;
+    }
+    
+    /* Reduce CTA pattern complexity */
+    .cta-section::after {
+        width: 600px;
+        height: 400px;
+        background-size: 400px 400px;
+        animation-duration: 30s;
     }
     
     .logo-container {
@@ -1012,8 +1491,9 @@ body {
         width: 2px;
     }
     
-    .pattern-line:nth-child(2) {
+    .pattern-line.main-line {
         height: 100px;
+        width: 3px;
     }
     
     .about-text {
@@ -1043,6 +1523,11 @@ body {
 }
 
 @media (max-width: 480px) {
+    :root {
+        /* Further reduce pattern intensity on small screens */
+        --pattern-intensity: 0.4;
+    }
+    
     .container {
         padding: 0 15px;
     }
@@ -1053,6 +1538,43 @@ body {
     
     .hero {
         min-height: 550px;
+    }
+    
+    /* Hide complex pattern elements on very small screens */
+    .pattern-v2, .pattern-v3 {
+        display: none;
+    }
+    
+    .pattern-diamond, .floating-pattern.pattern-line {
+        display: none;
+    }
+    
+    .bg-pattern-item.item-3, .bg-pattern-item.item-4 {
+        display: none;
+    }
+    
+    .corner-decoration.top-right, .corner-decoration.bottom-left {
+        display: none;
+    }
+    
+    /* Minimal patterns on very small screens */
+    .hero::after {
+        background-size: 200px 200px;
+        opacity: calc(0.2 * var(--pattern-intensity));
+    }
+    
+    .cta-section::after {
+        width: 400px;
+        height: 300px;
+        background-size: 300px 300px;
+    }
+    
+    .about-section::after {
+        opacity: calc(0.1 * var(--pattern-intensity));
+    }
+    
+    .footer::after {
+        opacity: calc(0.05 * var(--pattern-intensity));
     }
     
     .logo-container {
@@ -1084,7 +1606,7 @@ body {
         height: 60px;
     }
     
-    .pattern-line:nth-child(2) {
+    .pattern-line.main-line {
         height: 80px;
     }
     

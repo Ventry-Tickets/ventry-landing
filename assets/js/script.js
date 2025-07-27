@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', function() {
         initAnimations();
         initLuxuryEffects();
         initParallaxEffects();
+        initPatternInteractions();
+        initPatternVisibility();
+        initDynamicPatterns();
     }, 500);
 });
 
@@ -181,6 +184,7 @@ function initMouseParallax() {
 // Parallax effects on scroll
 function initParallaxEffects() {
     const heroBackground = document.querySelector('.hero-background');
+    const hero = document.querySelector('.hero');
     const patternLines = document.querySelectorAll('.pattern-line');
     
     window.addEventListener('scroll', () => {
@@ -191,11 +195,102 @@ function initParallaxEffects() {
             heroBackground.style.transform = `translateY(${rate}px)`;
         }
         
+        // Enhanced pattern parallax
         patternLines.forEach((line, index) => {
             const lineRate = scrolled * (0.1 + index * 0.05);
             line.style.transform = `skew(-25deg) translateY(${lineRate}px)`;
         });
+        
+        // Hero pattern parallax
+        if (hero) {
+            const heroRect = hero.getBoundingClientRect();
+            const heroParallax = scrolled * 0.3;
+            hero.style.setProperty('--pattern-offset', `${heroParallax}px`);
+        }
     });
+}
+
+// Enhanced pattern interactions
+function initPatternInteractions() {
+    // Pattern section interaction
+    const patternSection = document.querySelector('.pattern-section');
+    const patternLines = document.querySelectorAll('.pattern-line');
+    
+    if (patternSection && window.innerWidth > 768) {
+        patternSection.addEventListener('mouseenter', () => {
+            patternLines.forEach((line, index) => {
+                line.style.animationPlayState = 'paused';
+                line.style.transform = `skew(-25deg) scaleY(1.4)`;
+                line.style.opacity = '1';
+            });
+        });
+        
+        patternSection.addEventListener('mouseleave', () => {
+            patternLines.forEach((line, index) => {
+                line.style.animationPlayState = 'running';
+                line.style.transform = '';
+                line.style.opacity = '';
+            });
+        });
+    }
+    
+    // CTA section pattern pulse on form focus
+    const emailInput = document.getElementById('email');
+    const ctaSection = document.querySelector('.cta-section');
+    
+    if (emailInput && ctaSection) {
+        emailInput.addEventListener('focus', () => {
+            ctaSection.style.setProperty('--pattern-pulse', '1.1');
+        });
+        
+        emailInput.addEventListener('blur', () => {
+            ctaSection.style.setProperty('--pattern-pulse', '1');
+        });
+    }
+}
+
+// Initialize pattern visibility based on scroll
+function initPatternVisibility() {
+    const observerOptions = {
+        threshold: 0.2,
+        rootMargin: '0px 0px -10% 0px'
+    };
+    
+    const patternObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('pattern-visible');
+                
+                // Add subtle entrance animation to patterns
+                const patterns = entry.target.querySelectorAll('::after, ::before');
+                entry.target.style.setProperty('--pattern-entrance', '1');
+            } else {
+                entry.target.classList.remove('pattern-visible');
+                entry.target.style.setProperty('--pattern-entrance', '0');
+            }
+        });
+    }, observerOptions);
+    
+    // Observe sections with patterns
+    const sectionsWithPatterns = document.querySelectorAll('.hero, .cta-section, .pattern-section, .about-section, .footer');
+    sectionsWithPatterns.forEach(section => {
+        patternObserver.observe(section);
+    });
+}
+
+// Add dynamic pattern intensity based on time of day
+function initDynamicPatterns() {
+    const hour = new Date().getHours();
+    let patternIntensity = 1;
+    
+    // Adjust pattern opacity based on time (more subtle during day hours)
+    if (hour >= 6 && hour <= 18) {
+        patternIntensity = 0.7; // Daytime - more subtle
+    } else {
+        patternIntensity = 1; // Evening/Night - full intensity
+    }
+    
+    document.documentElement.style.setProperty('--pattern-intensity', patternIntensity);
 }
 
 // Scroll reveal animations
