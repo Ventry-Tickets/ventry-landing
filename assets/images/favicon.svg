@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 94" width="32" height="32">
+  <!-- Simplified Ventry Logo for Favicon -->
+  <defs>
+    <style>
+      .favicon-bg { fill: #000000; }
+      .favicon-v { fill: #d9fd07; }
+      .favicon-square { fill: #0b26fb; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="120" height="94" rx="16" class="favicon-bg"/>
+  
+  <!-- V Shape -->
+  <path d="M25 25 L50 25 L50 40 L70 65 L50 65 L25 40 Z" class="favicon-v"/>
+  
+  <!-- Square -->
+  <rect x="80" y="25" width="20" height="20" rx="2" class="favicon-square"/>
+</svg>
