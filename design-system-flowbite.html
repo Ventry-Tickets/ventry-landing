@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ventry + Flowbite-React Enhancement Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 60px 0;
+            background: #0b26fb;
+            margin: -40px -20px 60px -20px;
+            color: white;
+        }
+
+        .main-title {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            font-weight: 300;
+            opacity: 0.8;
+        }
+
+        .section {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #0b26fb;
+        }
+
+        .code-block {
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 24px;
+            border-radius: 12px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 2px solid #333;
+        }
+
+        .code-title {
+            color: #d9fd07;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .enhancement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .enhancement-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.2s ease;
+        }
+
+        .enhancement-card:hover {
+            border-color: #0b26fb;
+            transform: translateY(-2px);
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0b26fb;
+            margin-bottom: 15px;
+        }
+
+        .card-description {
+            color: #6c757d;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 8px 0;
+            color: #495057;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .feature-list li::before {
+            content: '→';
+            color: #0b26fb;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .config-section {
+            background: white;
+            border: 2px solid #0b26fb;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .config-title {
+            color: #0b26fb;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .npm-command {
+            background: #0b26fb;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 14px;
+            margin: 10px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+        }
+
+        .component-preview {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+        }
+
+        .preview-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+        }
+
+        .btn-ventry {
+            background: #0b26fb;
+            color: white;
+            border: 2px solid #0b26fb;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-ventry:hover {
+            background: #0920d9;
+            border-color: #0920d9;
+            transform: translateY(-1px);
+        }
+
+        .btn-ventry-secondary {
+            background: #d9fd07;
+            color: #1a1a1a;
+            border: 2px solid #d9fd07;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-ventry-secondary:hover {
+            background: #c4e607;
+            border-color: #c4e607;
+            transform: translateY(-1px);
+        }
+
+        .input-ventry {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            transition: all 0.2s ease;
+        }
+
+        .input-ventry:focus {
+            outline: none;
+            border-color: #0b26fb;
+        }
+
+        .card-ventry {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.2s ease;
+            margin-bottom: 20px;
+        }
+
+        .card-ventry:hover {
+            border-color: #0b26fb;
+            transform: translateY(-2px);
+        }
+
+        .table-container {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .table-ventry {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-ventry th {
+            background: #0b26fb;
+            color: white;
+            padding: 16px 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .table-ventry td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #e9ecef;
+            color: #495057;
+        }
+
+        .table-ventry tr:hover {
+            background: #f8f9fa;
+        }
+
+        .integration-steps {
+            background: white;
+            border: 2px solid #28a745;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .step-number {
+            background: #28a745;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .step-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .step-description {
+            color: #6c757d;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="main-title">VENTRY + FLOWBITE-REACT</h1>
+            <p class="subtitle">Enhancement Guide & Custom Configurations</p>
+        </div>
+
+        <!-- Installation & Setup -->
+        <div class="section">
+            <h2 class="section-title">🚀 Installation & Setup</h2>
+            
+            <div class="config-section">
+                <h3 class="config-title">1. Install Dependencies</h3>
+                <div class="npm-command">npm install flowbite-react flowbite tailwindcss</div>
+                <div class="npm-command">npm install @headlessui/react @heroicons/react</div>
+            </div>
+
+            <div class="config-section">
+                <h3 class="config-title">2. Tailwind Configuration</h3>
+                <div class="code-block">
+                    <div class="code-title">tailwind.config.js</div>
+<pre>module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./node_modules/flowbite/**/*.js",
+    "./node_modules/flowbite-react/**/*.js",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        // Ventry Brand Colors
+        ventry: {
+          blue: '#0b26fb',
+          lime: '#d9fd07',
+          dark: '#1a1a1a',
+          gray: {
+            50: '#f8f9fa',
+            100: '#e9ecef',
+            200: '#dee2e6',
+            300: '#ced4da',
+            400: '#adb5bd',
+            500: '#6c757d',
+            600: '#495057',
+            700: '#343a40',
+            800: '#212529',
+            900: '#1a1a1a',
+          }
+        }
+      },
+      fontFamily: {
+        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Helvetica Neue', 'Arial', 'sans-serif'],
+      },
+      borderRadius: {
+        'ventry': '12px',
+        'ventry-lg': '16px',
+      }
+    },
+  },
+  plugins: [require('flowbite/plugin')],
+}</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom Theme Configuration -->
+        <div class="section">
+            <h2 class="section-title">🎨 Custom Flowbite Theme</h2>
+            
+            <div class="code-block">
+                <div class="code-title">VentryTheme.js - Custom Flowbite Theme</div>
+<pre>export const ventryTheme = {
+  button: {
+    color: {
+      ventry: "bg-ventry-blue hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 text-white",
+      ventrySecondary: "bg-ventry-lime hover:bg-yellow-400 focus:ring-4 focus:ring-yellow-300 text-black font-semibold",
+      ventryOutline: "text-ventry-blue bg-transparent border border-ventry-blue hover:bg-ventry-blue hover:text-white focus:ring-4 focus:ring-blue-300",
+    },
+    size: {
+      xs: "text-xs px-2 py-1",
+      sm: "text-sm px-3 py-2", 
+      md: "text-sm px-5 py-2.5",
+      lg: "text-base px-6 py-3",
+      xl: "text-base px-8 py-4",
+    }
+  },
+  card: {
+    root: {
+      base: "flex rounded-ventry bg-white shadow-none border-2 border-gray-200 hover:border-ventry-blue transition-all duration-200 hover:-translate-y-0.5",
+    }
+  },
+  textInput: {
+    field: {
+      input: {
+        base: "block w-full border-2 bg-white text-gray-900 focus:border-ventry-blue focus:ring-0 rounded-lg",
+        colors: {
+          gray: "border-gray-200 focus:border-ventry-blue"
+        }
+      }
+    }
+  },
+  navbar: {
+    root: {
+      base: "bg-white border-b-2 border-gray-200 px-2 py-2.5 sm:px-4",
+    },
+    brand: {
+      base: "flex items-center font-bold text-2xl text-ventry-blue"
+    }
+  },
+  sidebar: {
+    root: {
+      base: "h-full bg-white border-r-2 border-gray-200",
+    },
+    item: {
+      base: "flex items-center justify-center rounded-lg p-2 text-base font-medium text-gray-900 hover:bg-gray-100 hover:text-ventry-blue transition-colors duration-200",
+    }
+  }
+};</pre>
+            </div>
+        </div>
+
+        <!-- Component Enhancements -->
+        <div class="section">
+            <h2 class="section-title">🧩 Enhanced Components</h2>
+            
+            <div class="enhancement-grid">
+                <div class="enhancement-card">
+                    <h3 class="card-title">Custom Button Component</h3>
+                    <p class="card-description">Enhanced Flowbite buttons with Ventry branding and flat design principles</p>
+                    <ul class="feature-list">
+                        <li>Ventry brand colors</li>
+                        <li>Flat design aesthetics</li>
+                        <li>Consistent hover states</li>
+                        <li>Loading states</li>
+                    </ul>
+                </div>
+
+                <div class="enhancement-card">
+                    <h3 class="card-title">Event Card Component</h3>
+                    <p class="card-description">Specialized card component for event listings with ticket purchasing integration</p>
+                    <ul class="feature-list">
+                        <li>Event image display</li>
+                        <li>Date/time formatting</li>
+                        <li>Price display</li>
+                        <li>Quick action buttons</li>
+                    </ul>
+                </div>
+
+                <div class="enhancement-card">
+                    <h3 class="card-title">Navigation System</h3>
+                    <p class="card-description">Custom navbar and sidebar components optimized for ticketing platform navigation</p>
+                    <ul class="feature-list">
+                        <li>Ventry logo integration</li>
+                        <li>User authentication states</li>
+                        <li>Mobile-responsive design</li>
+                        <li>Search functionality</li>
+                    </ul>
+                </div>
+
+                <div class="enhancement-card">
+                    <h3 class="card-title">Form Components</h3>
+                    <p class="card-description">Enhanced form elements for ticket booking and user registration</p>
+                    <ul class="feature-list">
+                        <li>Custom validation styling</li>
+                        <li>Multi-step form support</li>
+                        <li>Payment integration ready</li>
+                        <li>Accessibility compliant</li>
+                    </ul>
+                </div>
+
+                <div class="enhancement-card">
+                    <h3 class="card-title">Data Tables</h3>
+                    <p class="card-description">Custom table components for admin dashboards and ticket management</p>
+                    <ul class="feature-list">
+                        <li>Sortable columns</li>
+                        <li>Pagination support</li>
+                        <li>Bulk actions</li>
+                        <li>Export functionality</li>
+                    </ul>
+                </div>
+
+                <div class="enhancement-card">
+                    <h3 class="card-title">Modal System</h3>
+                    <p class="card-description">Enhanced modals for ticket purchase flows and confirmations</p>
+                    <ul class="feature-list">
+                        <li>Ticket selection modal</li>
+                        <li>Payment confirmation</li>
+                        <li>Event details overlay</li>
+                        <li>Success animations</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Component Examples -->
+        <div class="section">
+            <h2 class="section-title">📝 Component Code Examples</h2>
+            
+            <div class="code-block">
+                <div class="code-title">VentryButton.jsx</div>
+<pre>import { Button } from 'flowbite-react';
+import { ventryTheme } from './VentryTheme';
+
+export function VentryButton({ 
+  children, 
+  variant = 'primary', 
+  size = 'md', 
+  loading = false,
+  ...props 
+}) {
+  const getVariant = () => {
+    switch(variant) {
+      case 'secondary': return 'ventrySecondary';
+      case 'outline': return 'ventryOutline';
+      default: return 'ventry';
+    }
+  };
+
+  return (
+    &lt;Button
+      theme={ventryTheme.button}
+      color={getVariant()}
+      size={size}
+      disabled={loading}
+      className="transition-all duration-200 hover:-translate-y-0.5"
+      {...props}
+    &gt;
+      {loading ? (
+        &lt;&gt;
+          &lt;svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"&gt;
+            &lt;circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"&gt;&lt;/circle&gt;
+            &lt;path className="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"&gt;&lt;/path&gt;
+          &lt;/svg&gt;
+          Loading...
+        &lt;/&gt;
+      ) : children}
+    &lt;/Button&gt;
+  );
+}</pre>
+            </div>
+
+            <div class="code-block">
+                <div class="code-title">EventCard.jsx</div>
+<pre>import { Card } from 'flowbite-react';
+import { VentryButton } from './VentryButton';
+import { ventryTheme } from './VentryTheme';
+
+export function EventCard({ event }) {
+  return (
+    &lt;Card 
+      theme={ventryTheme.card}
+      className="max-w-sm"
+      imgSrc={event.imageUrl}
+      imgAlt={event.title}
+    &gt;
+      &lt;div className="space-y-4"&gt;
+        &lt;div&gt;
+          &lt;h5 className="text-xl font-bold tracking-tight text-gray-900"&gt;
+            {event.title}
+          &lt;/h5&gt;
+          &lt;p className="text-sm text-gray-500 uppercase font-semibold tracking-wide"&gt;
+            {event.date} • {event.venue}
+          &lt;/p&gt;
+        &lt;/div&gt;
+        
+        &lt;p className="font-normal text-gray-700"&gt;
+          {event.description}
+        &lt;/p&gt;
+        
+        &lt;div className="flex items-center justify-between"&gt;
+          &lt;span className="text-2xl font-bold text-ventry-blue"&gt;
+            ${event.price}
+          &lt;/span&gt;
+          &lt;VentryButton&gt;
+            Get Tickets
+          &lt;/VentryButton&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/Card&gt;
+  );
+}</pre>
+            </div>
+        </div>
+
+        <!-- Integration Steps -->
+        <div class="section">
+            <h2 class="section-title">⚡ Integration Steps</h2>
+            
+            <div class="integration-steps">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Setup Custom Theme Provider</div>
+                        <div class="step-description">Create a theme provider component that wraps your app with custom Ventry styling</div>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Replace Default Components</div>
+                        <div class="step-description">Gradually replace Flowbite components with your custom Ventry-themed versions</div>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Implement Custom Layouts</div>
+                        <div class="step-description">Create layout components for dashboard, event listings, and ticket management</div>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Add Business Logic</div>
+                        <div class="step-description">Integrate with your backend APIs for event management and ticket purchasing</div>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <div class="step-title">Optimize & Test</div>
+                        <div class="step-description">Performance optimization, responsive testing, and accessibility compliance</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Component Preview -->
+        <div class="section">
+            <h2 class="section-title">👀 Component Preview</h2>
+            
+            <div class="component-preview">
+                <div class="preview-title">Button Variants</div>
+                <button class="btn-ventry">Primary Button</button>
+                <button class="btn-ventry-secondary">Secondary Button</button>
+                <button class="btn-ventry" style="background: transparent; color: #0b26fb; border: 2px solid #0b26fb;">Outline Button</button>
+            </div>
+
+            <div class="component-preview">
+                <div class="preview-title">Form Elements</div>
+                <input type="text" class="input-ventry" placeholder="Event name...">
+                <input type="email" class="input-ventry" placeholder="your@email.com">
+            </div>
+
+            <div class="component-preview">
+                <div class="preview-title">Event Card Example</div>
+                <div class="card-ventry" style="max-width: 350px;">
+                    <div style="background: #f8f9fa; height: 200px; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: #6c757d;">
+                        Event Image
+                    </div>
+                    <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 8px; color: #1a1a1a;">Summer Music Festival</h3>
+                    <p style="color: #6c757d; font-size: 14px; margin-bottom: 16px; text-transform: uppercase; font-weight: 600; letter-spacing: 1px;">July 15, 2024 • Central Park</p>
+                    <p style="color: #495057; margin-bottom: 20px; line-height: 1.6;">Join us for an unforgettable evening of live music featuring top artists from around the world.</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 24px; font-weight: 700; color: #0b26fb;">$75</span>
+                        <button class="btn-ventry">Get Tickets</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Best Practices -->
+        <div class="section">
+            <h2 class="section-title">✨ Flowbite + Ventry Best Practices</h2>
+            
+            <div class="table-container">
+                <table class="table-ventry">
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Ventry Enhancement</th>
+                            <th>Implementation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Buttons</td>
+                            <td>Brand colors, flat design</td>
+                            <td>Custom theme + hover states</td>
+                        </tr>
+                        <tr>
+                            <td>Cards</td>
+                            <td>Sharp borders, hover effects</td>
+                            <td>Override border-radius, add transitions</td>
+                        </tr>
+                        <tr>
+                            <td>Forms</td>
+                            <td>Ventry blue focus states</td>
+                            <td>Custom focus colors in theme</td>
+                        </tr>
+                        <tr>
+                            <td>Navigation</td>
+                            <td>Logo integration, clean styling</td>
+                            <td>Custom navbar component</td>
+                        </tr>
+                        <tr>
+                            <td>Tables</td>
+                            <td>Flat headers, subtle hover</td>
+                            <td>Custom table theme</td>
+                        </tr>
+                        <tr>
+                            <td>Modals</td>
+                            <td>Clean borders, brand colors</td>
+                            <td>Override modal styling</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

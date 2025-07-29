@@ -1,0 +1,796 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ventry Flat Luxury UI/UX Design System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 60px 0;
+            background: #0b26fb;
+            margin: -40px -20px 60px -20px;
+            color: white;
+        }
+
+        .main-title {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.8;
+        }
+
+        .section {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #0b26fb;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .color-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .color-card:hover {
+            transform: translateY(-2px);
+            border-color: #0b26fb;
+        }
+
+        .color-swatch {
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            margin: 0 auto 20px;
+            border: 2px solid #e9ecef;
+        }
+
+        .primary-blue { background: #0b26fb; }
+        .primary-black { background: #000000; }
+        .secondary-lime { background: #d9fd07; }
+        .secondary-white { background: #ffffff; }
+        .neutral-100 { background: #f8f9fa; }
+        .neutral-200 { background: #e9ecef; }
+        .neutral-300 { background: #dee2e6; }
+        .neutral-400 { background: #ced4da; }
+        .neutral-500 { background: #adb5bd; }
+        .neutral-600 { background: #6c757d; }
+        .neutral-700 { background: #495057; }
+        .neutral-800 { background: #343a40; }
+        .neutral-900 { background: #212529; }
+        .success { background: #28a745; }
+        .warning { background: #ffc107; }
+        .error { background: #dc3545; }
+
+        .color-info h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .color-values {
+            font-size: 14px;
+            color: #6c757d;
+            font-family: 'Monaco', monospace;
+        }
+
+        .typography-showcase {
+            display: grid;
+            gap: 30px;
+        }
+
+        .type-example {
+            padding: 30px;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+        }
+
+        .display-1 {
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1.1;
+            color: #0b26fb;
+        }
+
+        .display-2 {
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #1a1a1a;
+        }
+
+        .heading-1 {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.3;
+            color: #1a1a1a;
+        }
+
+        .heading-2 {
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 1.4;
+            color: #1a1a1a;
+        }
+
+        .body-large {
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.6;
+            color: #495057;
+        }
+
+        .body-regular {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.6;
+            color: #6c757d;
+        }
+
+        .caption {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.4;
+            color: #adb5bd;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .component-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 8px;
+            min-width: 160px;
+        }
+
+        .btn-primary {
+            background: #0b26fb;
+            color: white;
+            border-color: #0b26fb;
+        }
+
+        .btn-primary:hover {
+            background: #0920d9;
+            border-color: #0920d9;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #d9fd07;
+            color: #1a1a1a;
+            border-color: #d9fd07;
+        }
+
+        .btn-secondary:hover {
+            background: #c4e607;
+            border-color: #c4e607;
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #0b26fb;
+            border-color: #0b26fb;
+        }
+
+        .btn-outline:hover {
+            background: #0b26fb;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: #6c757d;
+            border-color: transparent;
+        }
+
+        .btn-ghost:hover {
+            background: #f8f9fa;
+            color: #0b26fb;
+        }
+
+        .input-group {
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .flat-input {
+            width: 100%;
+            padding: 16px 20px;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            color: #1a1a1a;
+            font-size: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .flat-input:focus {
+            outline: none;
+            border-color: #0b26fb;
+        }
+
+        .flat-input::placeholder {
+            color: #adb5bd;
+        }
+
+        .card-flat {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.2s ease;
+        }
+
+        .card-flat:hover {
+            border-color: #0b26fb;
+            transform: translateY(-2px);
+        }
+
+        .spacing-guide {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .spacing-example {
+            background: #f8f9fa;
+            border: 2px solid #0b26fb;
+            border-radius: 8px;
+            text-align: center;
+            color: #0b26fb;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .space-xs { padding: 8px; }
+        .space-sm { padding: 16px; }
+        .space-md { padding: 24px; }
+        .space-lg { padding: 32px; }
+        .space-xl { padding: 48px; }
+        .space-xxl { padding: 64px; }
+
+        .guidelines-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .guidelines-list li {
+            padding: 20px;
+            margin-bottom: 16px;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            border-left: 4px solid #0b26fb;
+        }
+
+        .guidelines-list li strong {
+            color: #0b26fb;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .mobile-preview {
+            width: 300px;
+            height: 600px;
+            background: white;
+            border-radius: 24px;
+            border: 4px solid #e9ecef;
+            margin: 0 auto;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .mobile-header {
+            background: #0b26fb;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .mobile-title {
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .mobile-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .mobile-text {
+            color: #6c757d;
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .mobile-title-text {
+            color: #1a1a1a;
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .mobile-button {
+            background: #d9fd07;
+            color: #1a1a1a;
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: 2px solid #d9fd07;
+            font-weight: 600;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+        }
+
+        .icon-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .icon-item {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+        }
+
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            background: #0b26fb;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .dark-mode-example {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+
+        .dark-card {
+            background: #2d2d2d;
+            border: 2px solid #404040;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .dark-btn-primary {
+            background: #0b26fb;
+            color: white;
+            border: 2px solid #0b26fb;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .dark-btn-secondary {
+            background: #d9fd07;
+            color: #1a1a1a;
+            border: 2px solid #d9fd07;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="main-title">VENTRY FLAT LUXURY</h1>
+            <p class="subtitle">Clean & Simple UI/UX Design System</p>
+        </div>
+
+        <!-- Color Palette Section -->
+        <div class="section">
+            <h2 class="section-title">🎨 Flat Color Palette</h2>
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch primary-blue"></div>
+                    <div class="color-info">
+                        <h3>Primary Blue</h3>
+                        <div class="color-values">
+                            HEX: #0b26fb<br>
+                            RGB: 11, 38, 251<br>
+                            Main CTA & Brand
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="color-card">
+                    <div class="color-swatch secondary-lime"></div>
+                    <div class="color-info">
+                        <h3>Accent Lime</h3>
+                        <div class="color-values">
+                            HEX: #d9fd07<br>
+                            RGB: 217, 253, 7<br>
+                            Secondary Actions
+                        </div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch primary-black"></div>
+                    <div class="color-info">
+                        <h3>Text Black</h3>
+                        <div class="color-values">
+                            HEX: #1a1a1a<br>
+                            RGB: 26, 26, 26<br>
+                            Primary Text
+                        </div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch neutral-100"></div>
+                    <div class="color-info">
+                        <h3>Background</h3>
+                        <div class="color-values">
+                            HEX: #f8f9fa<br>
+                            RGB: 248, 249, 250<br>
+                            Main Background
+                        </div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch neutral-200"></div>
+                    <div class="color-info">
+                        <h3>Border Light</h3>
+                        <div class="color-values">
+                            HEX: #e9ecef<br>
+                            RGB: 233, 236, 239<br>
+                            Card Borders
+                        </div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch neutral-600"></div>
+                    <div class="color-info">
+                        <h3>Text Secondary</h3>
+                        <div class="color-values">
+                            HEX: #6c757d<br>
+                            RGB: 108, 117, 125<br>
+                            Body Text
+                        </div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch success"></div>
+                    <div class="color-info">
+                        <h3>Success</h3>
+                        <div class="color-values">
+                            HEX: #28a745<br>
+                            RGB: 40, 167, 69<br>
+                            Success States
+                        </div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch error"></div>
+                    <div class="color-info">
+                        <h3>Error</h3>
+                        <div class="color-values">
+                            HEX: #dc3545<br>
+                            RGB: 220, 53, 69<br>
+                            Error States
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Typography Section -->
+        <div class="section">
+            <h2 class="section-title">✍️ Typography System</h2>
+            <div class="typography-showcase">
+                <div class="type-example">
+                    <div class="display-1">Display Large</div>
+                    <p style="color: #6c757d; margin-top: 10px;">56px • 800 Weight • Hero Headlines</p>
+                </div>
+                
+                <div class="type-example">
+                    <div class="display-2">Display Medium</div>
+                    <p style="color: #6c757d; margin-top: 10px;">40px • 700 Weight • Page Headers</p>
+                </div>
+                
+                <div class="type-example">
+                    <div class="heading-1">Heading 1</div>
+                    <p style="color: #6c757d; margin-top: 10px;">32px • 700 Weight • Section Headers</p>
+                </div>
+                
+                <div class="type-example">
+                    <div class="heading-2">Heading 2</div>
+                    <p style="color: #6c757d; margin-top: 10px;">24px • 600 Weight • Subsections</p>
+                </div>
+                
+                <div class="type-example">
+                    <div class="body-large">Body Large - Perfect for important descriptions and featured content that needs emphasis while maintaining readability.</div>
+                    <p style="color: #6c757d; margin-top: 10px;">18px • 400 Weight • Important Content</p>
+                </div>
+                
+                <div class="type-example">
+                    <div class="body-regular">Body Regular - Standard text for general content, descriptions, and regular communication throughout the application interface.</div>
+                    <p style="color: #6c757d; margin-top: 10px;">16px • 400 Weight • Standard Text</p>
+                </div>
+                
+                <div class="type-example">
+                    <div class="caption">Caption Text</div>
+                    <p style="color: #6c757d; margin-top: 10px;">14px • 600 Weight • Labels & Meta Info</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Components Section -->
+        <div class="section">
+            <h2 class="section-title">🧩 Flat UI Components</h2>
+            <div class="component-grid">
+                <div class="component-card">
+                    <h3 style="margin-bottom: 20px; color: #1a1a1a;">Button Styles</h3>
+                    <button class="btn btn-primary">Primary</button>
+                    <button class="btn btn-secondary">Secondary</button>
+                    <button class="btn btn-outline">Outline</button>
+                    <button class="btn btn-ghost">Ghost</button>
+                </div>
+
+                <div class="component-card">
+                    <h3 style="margin-bottom: 20px; color: #1a1a1a;">Form Elements</h3>
+                    <div class="input-group">
+                        <label class="input-label">Email Address</label>
+                        <input type="email" class="flat-input" placeholder="hello@ventry-tickets.com">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Event Name</label>
+                        <input type="text" class="flat-input" placeholder="Summer Music Festival">
+                    </div>
+                </div>
+
+                <div class="component-card">
+                    <h3 style="margin-bottom: 20px; color: #1a1a1a;">Card Component</h3>
+                    <div class="card-flat">
+                        <h4 style="color: #0b26fb; margin-bottom: 10px; font-weight: 700;">Event Card</h4>
+                        <p style="color: #6c757d; font-size: 14px; margin-bottom: 15px;">Clean flat design with sharp borders and minimal styling</p>
+                        <button class="btn btn-primary" style="margin: 0;">Get Tickets</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Icons Section -->
+        <div class="section">
+            <h2 class="section-title">🎯 Icon System</h2>
+            <div class="icon-showcase">
+                <div class="icon-item">
+                    <div class="icon-circle">🎟️</div>
+                    <div style="font-weight: 600; color: #1a1a1a;">Tickets</div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon-circle">🎵</div>
+                    <div style="font-weight: 600; color: #1a1a1a;">Events</div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon-circle">👤</div>
+                    <div style="font-weight: 600; color: #1a1a1a;">Profile</div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon-circle">⚙️</div>
+                    <div style="font-weight: 600; color: #1a1a1a;">Settings</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Spacing System -->
+        <div class="section">
+            <h2 class="section-title">📐 Spacing System</h2>
+            <div class="spacing-guide">
+                <div class="spacing-example space-xs">XS - 8px</div>
+                <div class="spacing-example space-sm">SM - 16px</div>
+                <div class="spacing-example space-md">MD - 24px</div>
+                <div class="spacing-example space-lg">LG - 32px</div>
+                <div class="spacing-example space-xl">XL - 48px</div>
+                <div class="spacing-example space-xxl">XXL - 64px</div>
+            </div>
+        </div>
+
+        <!-- Mobile Preview -->
+        <div class="section">
+            <h2 class="section-title">📱 Mobile App Preview</h2>
+            <div class="mobile-preview">
+                <div class="mobile-header">
+                    <div class="mobile-title">VENTRY</div>
+                </div>
+                <div class="mobile-card">
+                    <div class="mobile-text">Upcoming Events</div>
+                    <div class="mobile-title-text">Summer Music Festival</div>
+                    <button class="mobile-button">Get Tickets</button>
+                </div>
+                <div class="mobile-card">
+                    <div class="mobile-text">Your Tickets</div>
+                    <div class="mobile-title-text">Jazz Night - Tonight 8PM</div>
+                    <button class="mobile-button">View Ticket</button>
+                </div>
+                <div class="mobile-card">
+                    <div class="mobile-text">Recommended</div>
+                    <div class="mobile-title-text">Art Gallery Opening</div>
+                    <button class="mobile-button">Learn More</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dark Mode Example -->
+        <div class="section">
+            <h2 class="section-title">🌙 Dark Mode Alternative</h2>
+            <div class="dark-mode-example">
+                <h3 style="color: white; margin-bottom: 20px;">Dark Theme Components</h3>
+                <div class="dark-card">
+                    <h4 style="color: #d9fd07; margin-bottom: 10px;">Featured Event</h4>
+                    <p style="color: #adb5bd; margin-bottom: 15px;">Electronic Music Festival - This Saturday</p>
+                    <button class="dark-btn-primary">Buy Now</button>
+                    <button class="dark-btn-secondary">Save Event</button>
+                </div>
+                <p style="color: #6c757d; font-size: 14px;">Optional dark mode using flat design principles</p>
+            </div>
+        </div>
+
+        <!-- Design Guidelines -->
+        <div class="section">
+            <h2 class="section-title">📋 Flat Design Guidelines</h2>
+            <ul class="guidelines-list">
+                <li>
+                    <strong>No Shadows or Gradients:</strong>
+                    Use solid colors, clean borders, and flat surfaces throughout the interface
+                </li>
+                <li>
+                    <strong>Sharp Corners & Clean Lines:</strong>
+                    8-16px border radius maximum, crisp 2px borders for definition
+                </li>
+                <li>
+                    <strong>Bold Typography:</strong>
+                    Use font weight and size to create hierarchy instead of effects
+                </li>
+                <li>
+                    <strong>High Contrast:</strong>
+                    Clear distinction between elements using color and spacing
+                </li>
+                <li>
+                    <strong>Minimal Interactions:</strong>
+                    Simple hover states with color changes and subtle transforms
+                </li>
+                <li>
+                    <strong>Grid-Based Layout:</strong>
+                    Consistent 8px spacing grid for alignment and balance
+                </li>
+                <li>
+                    <strong>Color as Communication:</strong>
+                    Use brand colors purposefully for actions and states
+                </li>
+                <li>
+                    <strong>White Space Usage:</strong>
+                    Generous spacing between elements for clean, breathable design
+                </li>
+                <li>
+                    <strong>Consistent Iconography:</strong>
+                    Simple, geometric icons that match the flat aesthetic
+                </li>
+                <li>
+                    <strong>Content First:</strong>
+                    Let content and functionality drive design decisions
+                </li>
+            </ul>
+
+ 
+        </div>
+    </div>
+</body>
+</html>
